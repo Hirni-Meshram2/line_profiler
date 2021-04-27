@@ -33,7 +33,7 @@ docker pull quay.io/erotemic/manylinux-opencv:manylinux1_i686-opencv4.1.0-py3.6
 docker pull quay.io/pypa/manylinux2010_x86_64:latest
 """
 
-#arch= "$1"
+arch="$1"
 cmd="$2"
 echo "$cmd"
 echo "arch: $1"
@@ -70,7 +70,7 @@ if [ "$_INSIDE_DOCKER" != "YES" ]; then
         -e VERSION="$VERSION" \
         -e MB_PYTHON_TAG="$MB_PYTHON_TAG" \
         -e WHEEL_NAME_HACK="$WHEEL_NAME_HACK" \
-        $DOCKER_IMAGE bash -c 'cd /io && ./run_manylinux_build.sh'
+        $DOCKER_IMAGE bash -c 'cd /io && ./run_manylinux_build.sh $arch $cmd'
 
     __interactive__='''
     docker run --rm \
