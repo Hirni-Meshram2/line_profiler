@@ -50,7 +50,7 @@ MB_PYTHON_TAG=${MB_PYTHON_TAG:=$(python -c "import setup; print(setup.native_mb_
 NAME=${NAME:=$(python -c "import setup; print(setup.NAME)")}
 VERSION=${VERSION:=$(python -c "import setup; print(setup.VERSION)")}
 REPO_ROOT=${REPO_ROOT:=/io}
-COMMAND = $2
+COMMAND=$2
 echo "
 MB_PYTHON_TAG = $MB_PYTHON_TAG
 DOCKER_IMAGE = $DOCKER_IMAGE
