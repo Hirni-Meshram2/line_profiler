@@ -68,6 +68,7 @@ if [ "$_INSIDE_DOCKER" != "YES" ]; then
         -v $PWD:/io \
         -e _INSIDE_DOCKER="YES" \
         -e NAME="$NAME" \
+        -e ARCH="$ARCH" \
         -e COMMAND="$COMMAND" \
         -e VERSION="$VERSION" \
         -e MB_PYTHON_TAG="$MB_PYTHON_TAG" \
