@@ -51,12 +51,14 @@ NAME=${NAME:=$(python -c "import setup; print(setup.NAME)")}
 VERSION=${VERSION:=$(python -c "import setup; print(setup.VERSION)")}
 REPO_ROOT=${REPO_ROOT:=/io}
 COMMAND=$2
+ARCH=$1
 echo "
 MB_PYTHON_TAG = $MB_PYTHON_TAG
 DOCKER_IMAGE = $DOCKER_IMAGE
 VERSION = $VERSION
 NAME = $NAME
 COMMAND = $COMMAND
+ARCH = $ARCH
 "
 
 if [ "$_INSIDE_DOCKER" != "YES" ]; then
@@ -70,7 +72,7 @@ if [ "$_INSIDE_DOCKER" != "YES" ]; then
         -e VERSION="$VERSION" \
         -e MB_PYTHON_TAG="$MB_PYTHON_TAG" \
         -e WHEEL_NAME_HACK="$WHEEL_NAME_HACK" \
-        $DOCKER_IMAGE bash -c 'cd /io && ./run_manylinux_build.sh $arch $COMMAND'
+        $DOCKER_IMAGE bash -c 'cd /io && ./run_manylinux_build.sh $ARCH $COMMAND'
 
     __interactive__='''
     docker run --rm \
