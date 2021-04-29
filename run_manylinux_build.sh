@@ -127,8 +127,8 @@ if [ `uname -m` == "aarch64" ]; then
     echo "=====================================================Test Wheel"====================================================="    
     python run_tests.py
     if [ "$COMMAND" == "publish" ]; then
-        ls -al
         echo "=====================================================Publish Wheel"====================================================="
+        ls -al
         GPG_EXECUTABLE=gpg
         $GPG_EXECUTABLE --version
         openssl version
@@ -145,7 +145,7 @@ if [ `uname -m` == "aarch64" ]; then
         pip install six pyopenssl ndg-httpsclient pyasn1 -U --user
         pip install requests[security] twine --user
         GPG_KEYID=$(cat dev/public_gpg_key)
-        echo "GPG_KEYID = '$GPG_KEYID'"
+        echo "GPG_KEYID = '$GPG_KEYID' "
         export TWINE_REPOSITORY_URL=https://upload.pypi.org/legacy/
         export PYUTILS_TWINE_USERNAME=${{ secrets.PYUTILS_TWINE_USERNAME }}
         export PYUTILS_TWINE_PASSWORD=${{ secrets.PYUTILS_TWINE_PASSWORD }}
