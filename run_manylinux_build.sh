@@ -33,16 +33,14 @@ docker pull quay.io/erotemic/manylinux-opencv:manylinux1_i686-opencv4.1.0-py3.6
 docker pull quay.io/pypa/manylinux2010_x86_64:latest
 """
 
-arch="$1"
-cmd="$2"
 #echo "$cmd"
 echo "arch: $1"
 echo "command: $2"
 #DOCKER_IMAGE=${DOCKER_IMAGE:="quay.io/erotemic/manylinux-for:x86_64-opencv4.1.0-v2"}
-if [ "$1" == "x86_64" ]; then
-    DOCKER_IMAGE=${DOCKER_IMAGE:="quay.io/pypa/manylinux2010_x86_64:latest"}
-else
+if [ "$1" == "aarch64" ]; then
     DOCKER_IMAGE=${DOCKER_IMAGE:="quay.io/pypa/manylinux2014_aarch64:latest"}
+else
+    DOCKER_IMAGE=${DOCKER_IMAGE:="quay.io/pypa/manylinux2010_x86_64:latest"}
 fi    
 # Valid multibuild python versions are:
 # cp27-cp27m  cp27-cp27mu  cp34-cp34m  cp35-cp35m  cp36-cp36m  cp37-cp37m, cp38-cp38m
