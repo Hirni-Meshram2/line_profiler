@@ -36,7 +36,7 @@ jobs:
     #    flake8 . --count --exit-zero --max-complexity=20 --max-line-length=127 --statistics
     - name: Build Wheel
       run: |
-        ./run_manylinux_build.sh x86_64 none
+        ./run_manylinux_build.sh
         echo "====="
     - name: Install Wheel
       run: |
@@ -71,8 +71,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Build and Test Wheel Arm64
       run: |
-        #chmod +x run_manylinux_aarch64_build.sh
-        ./run_manylinux_build.sh aarch64 none
+        ./run_manylinux_build.sh aarch64
         echo "====="
 #__doc__: |
 #    # How to run locally
