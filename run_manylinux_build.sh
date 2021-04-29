@@ -32,10 +32,6 @@ MB_PYTHON_TAG=cp27-cp27m ./run_manylinux_build.sh
 docker pull quay.io/erotemic/manylinux-opencv:manylinux1_i686-opencv4.1.0-py3.6
 docker pull quay.io/pypa/manylinux2010_x86_64:latest
 """
-
-#echo "$cmd"
-echo "arch: $1"
-echo "command: $2"
 #DOCKER_IMAGE=${DOCKER_IMAGE:="quay.io/erotemic/manylinux-for:x86_64-opencv4.1.0-v2"}
 if [ "$1" == "aarch64" ]; then
     DOCKER_IMAGE=${DOCKER_IMAGE:="quay.io/pypa/manylinux2014_aarch64:latest"}
@@ -116,9 +112,10 @@ else
     chmod -R o+rw $NAME.egg-info
 fi
 if [ `uname -m` == "aarch64" ]; then
+    #install wheel
+    echo "=====================================================Install Wheel"====================================================="
     ls -al
     ls -al wheelhouse
-    uname -m    
     MB_PYTHON_TAG=$(python -c "import setup; print(setup.MB_PYTHON_TAG)") 
     VERSION=$(python -c "import setup; print(setup.VERSION)") 
     echo "MB_PYTHON_TAG = $MB_PYTHON_TAG"
@@ -126,11 +123,12 @@ if [ `uname -m` == "aarch64" ]; then
     BDIST_WHEEL_PATH=$(ls wheelhouse/*-${VERSION}-${MB_PYTHON_TAG}-*2014_aarch64.whl)
     echo "BDIST_WHEEL_PATH = $BDIST_WHEEL_PATH"
     python -m pip install $BDIST_WHEEL_PATH[all]
-        #test wheel
+    #test wheel
+    echo "=====================================================Test Wheel"====================================================="    
     python run_tests.py
     if [ "$COMMAND" == "publish" ]; then
         ls -al
-        uname -m
+        echo "=====================================================Publish Wheel"====================================================="
         GPG_EXECUTABLE=gpg
         $GPG_EXECUTABLE --version
         openssl version
